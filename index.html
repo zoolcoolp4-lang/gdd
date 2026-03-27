@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إمبراطورية السودان الرقمية Pro</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-color: #050810;
+            --card-bg: #0c1222;
+            --neon-blue: #00f2fe;
+            --neon-purple: #4facfe;
+            --neon-gold: #fadb14;
+            --text-color: #e2e8f0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding-bottom: 80px;
+            overflow-x: hidden;
+            background-image: radial-gradient(#1a223f 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+
+        /* --- الهيدر الفخم --- */
+        .header {
+            background: var(--card-bg);
+            padding: 25px;
+            text-align: center;
+            border-bottom: 2px solid var(--neon-blue);
+            box-shadow: 0 0 15px rgba(0, 242, 254, 0.5);
+            animation: headerGlow 2s infinite alternate;
+        }
+
+        @keyframes headerGlow {
+            from { box-shadow: 0 0 10px rgba(0, 242, 254, 0.3); }
+            to { box-shadow: 0 0 20px rgba(0, 242, 254, 0.7); }
+        }
+
+        /* --- كرت الملف الشخصي المنور --- */
+        .user-card {
+            background: linear-gradient(135deg, #0c1222, #1e293b);
+            margin: 20px;
+            padding: 20px;
+            border-radius: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid rgba(0, 242, 254, 0.3);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            transition: 0.3s;
+        }
+
+        .user-card:hover {
+            box-shadow: 0 0 15px rgba(79, 172, 254, 0.5);
+            transform: translateY(-3px);
+        }
+
+        .balance {
+            color: #4ade80;
+            font-weight: bold;
+            font-size: 1.3rem;
+            text-shadow: 0 0 10px rgba(74, 222, 128, 0.7);
+        }
+
+        /* --- الأقسام التفاعلية --- */
+        .tabs {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            padding: 10px 20px;
+        }
+
+        .tab-btn {
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-color);
+            padding: 12px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.3s;
+            font-weight: bold;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tab-btn.active {
+            background: linear-gradient(45deg, var(--neon-purple), var(--neon-blue));
+            color: black;
+            box-shadow: 0 0 15px var(--neon-blue);
+        }
+
+        .tab-btn:not(.active):hover {
+            border-color: var(--neon-blue);
+            box-shadow: 0 0 10px rgba(0, 242, 254, 0.3);
+        }
+
+        /* --- شبكة المنتجات الرهيبة --- */
+        .product-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            padding: 15px 20px;
+        }
+
+        .product-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: 0.3s ease-in-out;
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: scale(1.05);
+            border-color: var(--neon-purple);
+            box-shadow: 0 0 20px rgba(79, 172, 254, 0.4);
+        }
+
+        .product-card i {
+            font-size: 2.5rem;
+            background: linear-gradient(45deg, var(--neon-purple), var(--neon-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+            display: inline-block;
+        }
+
+        .price {
+            color: var(--neon-gold);
+            display: block;
+            margin: 10px 0;
+            font-weight: bold;
+            font-size: 1.1rem;
+            text-shadow: 0 0 8px rgba(250, 219, 20, 0.5);
+        }
+
+        /* --- زر الشراء الحركي --- */
+        .buy-btn {
+            background: transparent;
+            border: 2px solid var(--neon-blue);
+            color: var(--neon-blue);
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .buy-btn:hover {
+            background: var(--neon-blue);
+            color: black;
+            box-shadow: 0 0 15px var(--neon-blue);
+        }
+
+        .buy-btn:active {
+            transform: scale(0.95);
+        }
+
+        /* --- شريط التنقل السفلي الفخم --- */
+        .nav-bar {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background: rgba(12, 18, 34, 0.95);
+            display: flex;
+            justify-content: space-around;
+            padding: 15px 0;
+            border-top: 2px solid var(--neon-purple);
+            box-shadow: 0 -5px 15px rgba(79, 172, 254, 0.3);
+            backdrop-filter: blur(5px);
+            z_index: 100;
+        }
+
+        .nav-item {
+            color: #94a3b8;
+            text-decoration: none;
+            font-size: 0.9rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: 0.3s;
+        }
+
+        .nav-item i { font-size: 1.3rem; margin-bottom: 5px; }
+
+        .nav-item.active {
+            color: var(--neon-blue);
+            text-shadow: 0 0 10px var(--neon-blue);
+        }
+
+        .nav-item:hover { color: white; }
+
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <h2 style="margin:0; background: linear-gradient(45deg, #fff, var(--neon-blue)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">إمبراطورية السودان الرقمية</h2>
+</div>
+
+<div class="user-card" id="profile">
+    <div>
+        <span id="username" style="display:block; font-weight:bold; font-size: 1.1rem;">جاري التحميل...</span>
+        <span style="font-size: 0.8rem; color: #94a3b8;">ملفك الشخصي الموثق</span>
+    </div>
+    <div class="balance">55,000 SDG</div>
+</div>
+
+<div class="tabs">
+    <button class="tab-btn active">ثغرات</button>
+    <button class="tab-btn">أرقام</button>
+    <button class="tab-btn">قروبات</button>
+</div>
+
+<div class="product-grid">
+    <div class="product-card">
+        <i class="fas fa-user-secret"></i>
+        <h3>ثغرة SQL</h3>
+        <span class="price">7,500 SDG</span>
+        <button class="buy-btn" onclick="order('ثغرة SQL')">قنص</button>
+    </div>
+    <div class="product-card">
+        <i class="fas fa-sim-card"></i>
+        <h3>رقم أمريكي</h3>
+        <span class="price">2,000 SDG</span>
+        <button class="buy-btn" onclick="order('رقم أمريكي')">حجز</button>
+    </div>
+</div>
+
+<div class="nav-bar">
+    <a href="#" class="nav-item active"><i class="fas fa-server"></i> المتجر</a>
+    <a href="#" class="nav-item"><i class="fas fa-history"></i> عملياتي</a>
+    <a href="#" class="nav-item" onclick="support()"><i class="fas fa-headset"></i> الدعم</a>
+</div>
+
+<script>
+    let tg = window.Telegram.WebApp;
+    tg.expand();
+    // جلب اسم المستخدم الحقيقي من تلجرام
+    document.getElementById('username').innerText = tg.initDataUnsafe.user.first_name || "مستخدم موثق";
+
+    function order(name) {
+        // تأثير اهتزاز خفيف عند الضغط
+        tg.HapticFeedback.notificationOccurred('success');
+        tg.sendData("طلب قنص: " + name);
+    }
+    
+    function support() {
+        tg.HapticFeedback.impactOccurred('medium');
+        tg.sendData("طلب دعم فني مباشر");
+    }
+</script>
+</body>
+</html>
